@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Add Product</title>
+   <link rel="stylesheet" href="inventory.css">
+</head>
+<body>
+   <button class="buttonb" onclick="redirectToAnotherPage()">
+      
+      <div class="button-box">
+        <span class="button-elem">
+          <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+            ></path>
+          </svg>
+        </span>
+        <span class="button-elem">
+          <svg viewBox="0 0 46 40">
+            <path
+              d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+            ></path>
+          </svg>
+        </span>
+      </div>
+    </button>
+
+   <div class="container">
+      <div class="existing">
+        <h1> EXISTING PRODUCTS</h1>
+      </div>
+
+      <div class="toadd">
+         <h1> MANAGE PRODUCT</h1>
+
+         <div class="form">
+            <form id="add-product-form">
+                <input type="text" id="product-name" placeholder="Product Name" required>
+                <input type="number" id="product-quantity" placeholder="Quantity" required>
+                <input type="number" id="product-price" placeholder="Price" required>
+
+                <select id="product-category" required>
+                  <option value="" disabled selected>Select Category</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Clothing">Clothing</option>
+                  <option value="Books and Media">Books and Media</option>
+                  <option value="Home and Garden">Home and Garden</option>
+                  <option value="Toys and Games">Toys and Games</option>
+                  <option value="Sports and Outdoors">Sports and Outdoors</option>
+                  <option value="Health and Beauty">Health and Beauty</option>
+                  <option value="Food and Pastry">Food and Pastry</option>
+                  <!-- Add more options for additional categories -->
+                  
+                </select>    
+   
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+
+        <div class="formtwo">
+         <form id="add-product-form">
+             <input type="text" id="product-name" placeholder="Product Name" required>
+             <input type="number" id="product-code" placeholder="Product Code" required>
+             <button type="submit"> Delete Product</button>
+         </form>
+     </div>
+
+     <div class="formthree">
+      <form id="add-product-form">
+          <input type="text" id="product-name" placeholder="Product Name" required>
+          <input type="number" id="product-code" placeholder="Product Code" required>
+          <button type="submit">Update Product</button>
+      </form>
+  </div>
+
+
+      </div>
+
+   </div>
+
+
+   <script>
+  
+  document.addEventListener('DOMContentLoaded', function() {
+         const form = document.getElementById('add-product-form');
+         const existingProducts = document.querySelector('.existing');
+      
+         form.addEventListener('submit', function(event) {
+            event.preventDefault();
+      
+            const productName = document.getElementById('product-name').value;
+            const productQuantity = document.getElementById('product-quantity').value;
+            const productPrice = document.getElementById('product-price').value;
+            const productCategory = document.getElementById('product-category').value;
+      
+            if (productName && productQuantity && productPrice && productCategory) {
+
+                const productCode = Math.floor(1000000000 + Math.random() * 90000000000);
+
+               const productItem = document.createElement('div');
+               productItem.textContent = `* ${productName} ::::: stcks:${productQuantity} P${productPrice}-- ${productCategory} -- ${productCode}`;
+      
+               existingProducts.appendChild(productItem);
+      
+               // Clear the form fields after adding the product
+               document.getElementById('product-name').value = '';
+               document.getElementById('product-quantity').value = '';
+               document.getElementById('product-price').value = '';
+               document.getElementById('product-category').value = '';
+
+            } else {
+               alert('Please fill in both fields: Product Name and Quantity');
+            }
+         });
+      });
+
+
+      function redirectToAnotherPage() {
+    // Change 'anotherpage.html' to the desired HTML file
+    window.location.href = 'pos.html';
+  }
+
+  /*-------------------------------------------------------------------- DELETE PRODUCT -----------------------------------------------*/
+ 
+  document1.addEventListener('DOMContentLoaded', function() {
+    const addProductForm = document1.getElementById('add-product-form');
+    const formTwoProductName = document1.getElementById('product-name');
+    const formTwoProductCode = document1.getElementById('product-code');
+    const formTwo = document1.querySelector('.formtwo');
+    const existingProducts = document1.querySelector('.existing');
+
+    addProductForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const productName = document1.getElementById('product-name').value.trim();
+        const productCode = Math.floor(1000000000 + Math.random() * 9000000000);
+
+        if (productName) {
+            const productItem = document1.createElement('div');
+            productItem.textContent = `* ${productName} (Code: ${productCode})`;
+            existingProducts.appendChild(productItem);
+
+            // Update formTwo fields with the added product data
+            formTwoProductName.value = productName;
+            formTwoProductCode.value = productCode;
+
+            // Clear the form fields after adding the product
+            document1.getElementById('product-name').value = '';
+
+        } else {
+            alert('Please enter a product name.');
+        }
+    });
+
+    formTwo.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const productName = formTwoProductName.value.trim().toLowerCase();
+        const productCode = formTwoProductCode.value.trim();
+        const products = existingProducts.querySelectorAll('div');
+
+        if (productName && productCode) {
+            let productDeleted = false;
+
+            products.forEach(product => {
+                const name = product.textContent.split('(Code:')[0].trim().toLowerCase();
+                const code = product.textContent.split('(Code:')[1].split(')')[0].trim();
+
+                if (name === productName && code === productCode) {
+                    existingProducts.removeChild(product);
+                    productDeleted = true;
+                }
+            });
+
+            if (productDeleted) {
+                alert('Product deleted successfully.');
+            } else {
+                alert('Product not found.');
+            }
+
+            // Clear the input fields after deletion attempt
+            formTwoProductName.value = '';
+            formTwoProductCode.value = '';
+        } else {
+            alert('Please enter both product name and product code.');
+        }
+    });
+});
+
+  </script>
+
+</body>
+</html>
